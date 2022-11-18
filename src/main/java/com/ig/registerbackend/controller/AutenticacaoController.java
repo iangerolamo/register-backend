@@ -1,8 +1,8 @@
 package com.ig.registerbackend.controller;
 
-import com.ig.registerbackend.controller.dto.TokenDTO;
+import com.ig.registerbackend.model.dto.TokenDTO;
 import com.ig.registerbackend.controller.form.LoginForm;
-import com.ig.registerbackend.model.Usuario;
+
 import com.ig.registerbackend.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

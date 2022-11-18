@@ -1,4 +1,4 @@
-package com.ig.registerbackend.controller.dto;
+package com.ig.registerbackend.model.dto;
 
 public class TokenDTO {
     private String token;

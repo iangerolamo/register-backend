@@ -1,20 +1,23 @@
-package com.ig.registerbackend.controller.dto;
+package com.ig.registerbackend.model.dto;
 
 public class UsuarioDTO {
 
     private String nome;
     private String email;
     private String senha;
+    private String timeCoracao;
 
     public UsuarioDTO() {
     }
 
     public UsuarioDTO(String nome,
                       String email,
-                      String senha) {
+                      String senha,
+                      String timeCoracao) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.timeCoracao = timeCoracao;
     }
 
     public String getNome() {
@@ -39,5 +42,13 @@ public class UsuarioDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTimeCoracao() {
+        return timeCoracao;
+    }
+
+    public void setTimeCoracao(String timeCoracao) {
+        this.timeCoracao = timeCoracao;
     }
 }
