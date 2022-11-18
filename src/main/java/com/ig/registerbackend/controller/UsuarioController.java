@@ -1,6 +1,6 @@
 package com.ig.registerbackend.controller;
 
-import com.ig.registerbackend.controller.dto.UsuarioDTO;
+import com.ig.registerbackend.model.dto.UsuarioDTO;
 import com.ig.registerbackend.model.Usuario;
 import com.ig.registerbackend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.websocket.server.PathParam;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -26,6 +28,11 @@ public class UsuarioController {
     @GetMapping
     public List<Usuario> obterTodosUsuarios() {
         return usuarioService.obterTodosUsuarios();
+    }
+
+    @GetMapping("/{timeCoracao}")
+    public Optional<Usuario> obterUsuarioPorTimeCoracao(@PathVariable String timeCoracao) {
+        return usuarioService.obterUsuarioPorTimeCoracao(timeCoracao);
     }
 
     @PostMapping
