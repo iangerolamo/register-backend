@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @EnableWebSecurity
 @Configuration
@@ -46,15 +47,16 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
   }
 
-  private static final String[] PUBLIC_MATCHERS_GET = {"/usuarios"};
+  private static final String[] PUBLIC_MATCHERS_GET = {"/usuarios", "/helloworld"};
 
-  private static final String[] PUBLIC_MATCHERS_POST = {"/usuarios", "/auth"};
+  private static final String[] PUBLIC_MATCHERS_POST = {"/usuarios", "/auth", "/login"};
 
   private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};
 
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity
         .headers()
+
         .frameOptions()
         .disable()
         .and()
@@ -67,6 +69,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         .permitAll()
         .anyRequest()
         .authenticated()
+            .and()
+            .cors()
+
         .and()
         .csrf()
         .disable()
@@ -85,6 +90,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
     configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
+    configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;

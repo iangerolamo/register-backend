@@ -1,6 +1,4 @@
-create table teste as select * from csvread('D:/dev/teste.csv', null, 'fieldSeparator=;');
-
-
+-- create table teste as select * from csvread('D:/dev/teste.csv', null, 'fieldSeparator=;');
 create table usuario
 (
     id           bigint auto_increment NOT NULL PRIMARY KEY,

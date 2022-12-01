@@ -5,6 +5,7 @@ import com.ig.registerbackend.controller.form.LoginForm;
 
 import com.ig.registerbackend.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +25,9 @@ public class AutenticacaoController {
 
   @Autowired private TokenService tokenService;
 
+  @Value("${forum.jwt.expiration}")
+  private String expiration;
+
   @PostMapping
   public ResponseEntity<TokenDTO> autenticar(@RequestBody LoginForm loginForm) {
     UsernamePasswordAuthenticationToken dadosLogin = loginForm.converter();
@@ -31,7 +35,7 @@ public class AutenticacaoController {
     try {
       Authentication authentication = authenticationManager.authenticate(dadosLogin);
       String token = tokenService.gerarToken(authentication);
-      return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
+      return ResponseEntity.ok(new TokenDTO(token, "Bearer", expiration));
 
     } catch (AuthenticationException e) {
       return ResponseEntity.badRequest().build();
